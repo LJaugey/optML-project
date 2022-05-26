@@ -5,12 +5,12 @@ import torch.nn.functional as F
 
 class LeNet5(nn.Module):
     # modified LeNet5, Relu instead of sigmoid
-    def __init__(self, cifar10=False):
+    def __init__(self, dataset='mnist'):
         super(LeNet5, self).__init__()
         # input is 1 x 28 x 28 
         # if cifar10, input is 2 x 32 x 32
         self.conv1 = nn.Conv2d(in_channels = 1, out_channels=6, kernel_size=5, padding=2)
-        if cifar10:
+        if dataset=='cifar10':
             self.conv1 = nn.Conv2d(in_channels = 3, out_channels=6, kernel_size=5, padding=2)
         self.r1 = nn.ReLU()
         # 6 x 28 x 28
@@ -24,7 +24,7 @@ class LeNet5(nn.Module):
         self.f = nn.Flatten()
         # 1 x 1 x 400
         self.lin1 = nn.Linear(in_features=400, out_features=120)
-        if cifar10:
+        if dataset=='cifar10':
             self.lin1 = nn.Linear(in_features=576, out_features=120)
         self.r3 = nn.ReLU()
         # 1 x 1 x 120
@@ -32,6 +32,9 @@ class LeNet5(nn.Module):
         self.r4 = nn.ReLU()
         # 1 x 1 x 80
         self.lin3 = nn.Linear(in_features=80, out_features=10)
+        if dataset=='emnist':
+            self.lin3 = nn.Linear(in_features=80, out_features=26)
+
 
         self.layers = nn.Sequential(self.conv1, self.r1, 
                                     self.pool1, 
