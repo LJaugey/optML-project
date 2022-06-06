@@ -112,7 +112,7 @@ def run_adgd(net, device, trainloader, testloader, N_train, n_epoch=2, amplifier
 
         running_loss = 0.0
         for i, data in enumerate(trainloader, 0):
-            print(str(i/len(trainloader) * 100) + "%")
+            print(str(i/len(trainloader) * 100) + "%                   ", end='\r')
             inputs, labels = data
             inputs, labels = inputs.to(device), labels.to(device)
 
