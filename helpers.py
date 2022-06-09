@@ -13,6 +13,7 @@ from torch.optim import Adam, SGD
 
 from optimizer import Adsgd
 
+
 def load_data(dataset='mnist', batch_size=128, num_workers=2):
     """
     Loads the required dataset
@@ -52,8 +53,8 @@ def load_data(dataset='mnist', batch_size=128, num_workers=2):
     else:
         raise ValueError('Only mnist, fmnist, emnist, cifar10 are supported')
 
-    trainloader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=num_workers)
-    testloader = torch.utils.data.DataLoader(test_set, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+    trainloader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=num_workers, pin_memory=True)
+    testloader = torch.utils.data.DataLoader(test_set, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=True)
 
     return trainloader, testloader, num_classes
 
