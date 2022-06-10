@@ -1,0 +1,6 @@
+## this project contains the dataset, will be ignored when pushed to 
+github ##
+/data/
+/__pycache__/
+/venv/
+/results/
