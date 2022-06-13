@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #folder = 'results_test/mnist/mnist_Lenet5_seed_'
-folder = 'results_test/mnist/lenet5_seed_'
+folder = 'results_adam/mnist/lenet5_seed_'
 #folder = 'results_test/fmnist/fmnist_lenet5_seed_'
-experiment = 'adgd_0.02_1_'
+experiment = 'adam_0.02_1_'
 
 file = 'ta.npy'
 n_seed = 5

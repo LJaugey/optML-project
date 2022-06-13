@@ -5,13 +5,15 @@
 #SBATCH --time=1:0:0
 #SBATCH --gres=gpu:1
 #SBATCH --qos=gpu_free
-#SBATCH --partition=debug
+#SBATCH --partition=gpu
 
-source ~/OptML/optML-project/bin/activate
-pip install torch torchvision
+#source ~/OptML/optML-project/bin/activate
+#pip install torch torchvision
 
-module purge
-module load gcc mvapich2 python
+#module purge
+#module load gcc mvapich2 python
 
-srun python train_mnist.py
-deactivate
+srun python train.py sgdm mnist
+srun python train.py adam mnist
+srun python train.py adgd mnist
+

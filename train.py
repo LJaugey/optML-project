@@ -4,6 +4,7 @@ import torchvision.models as models
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 
 from helpers import *
 from lenet5 import LeNet5
@@ -17,18 +18,22 @@ rank = comm.Get_rank()
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-opt = "sgdm"
+opt = sys.argv[1]
+#opt = 'sgdm'
+#opt = 'adam'
+#opt = 'adgd'
+
+data_set = sys.argv[2]
+#data_set = 'mnist'
+#data_set = 'fmnist'
+#data_set = 'emnist'
+#data_set = 'cifar10'
 
 output_folder = './results_'+opt+'/'
 
 batch_size = 512
 num_workers = 0
-n_epoch = 2
-
-data_set = 'mnist'
-#data_set = 'fmnist'
-#data_set = 'emnist'
-#data_set = 'cifar10'
+n_epoch = 100
 
 
 trainloader, testloader, num_classes = load_data(dataset=data_set, batch_size=batch_size, num_workers=num_workers)
