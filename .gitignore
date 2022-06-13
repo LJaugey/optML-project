@@ -4,3 +4,7 @@ github ##
 /__pycache__/
 /venv/
 /results/
+lib/
+lib64
+include/
+bin/
