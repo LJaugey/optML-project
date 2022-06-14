@@ -66,7 +66,7 @@ for r_, seed in enumerate(seeds):
                 net=net, device=device, trainloader=trainloader, testloader=testloader,
                 N_train=N_train, n_epoch=n_epoch, checkpoint=checkpoint, batch_size=batch_size)
 
-        method = f"sgdm_{lr_amplifier}_{lr_damping}"
+        method = f"/sgdm_0.01_0.9"
 
 
     if(opt=="adam"):
@@ -74,7 +74,7 @@ for r_, seed in enumerate(seeds):
                 net=net, device=device, trainloader=trainloader, testloader=testloader,
                 N_train=N_train, n_epoch=n_epoch, checkpoint=checkpoint, batch_size=batch_size)
 
-        method = f"adam_{lr_amplifier}_{lr_damping}"
+        method = f"/adam_0.01"
 
 
     if(opt=="adgd"):
