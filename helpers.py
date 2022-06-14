@@ -272,4 +272,4 @@ def save_results(losses, test_losses, train_acc, test_acc, it_train, it_test, gr
     to_save = [losses, test_losses, train_acc, test_acc, it_train, it_test, grad_norms, lrs] + to_save_extra
     prefixes = ['l', 'tl', 'a', 'ta', 'itr', 'ite', 'gn', 'lr'] + prefixes_extra
     for log, prefix in zip(to_save, prefixes):
-        np.save(f'{path}/{method}_{prefix}.npy', log)
+        np.save(f'{path}/{prefix}.npy', log)

@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from pathlib import Path
 
 opt = 'adgd'
 dataset = 'emnist'
@@ -7,6 +8,41 @@ dataset = 'emnist'
 #folder = 'results_test/mnist/mnist_Lenet5_seed_'
 #folder = 'results_' + opt + '/fmnist/lenet5_seed_'
 #folder = 'results_' + opt + '/' + dataset + '/lenet5_seed_'
+
+
+datasets = ['mnist', 'fmnist', 'emnist', 'cifar10']
+experiments = ['adam_0.01', 'adgd_0.1_1.0', 'adgd_0.02_1.0', 'adgd_0.02_2.0', 'sgdm_0.01_0.9']
+
+# test accuracy
+# step size
+# train loss
+
+parent_folder = 'results/'
+
+n_seed = 5
+
+for dataset in datasets:
+    rootdir = parent_folder + dataset + '/'
+
+    for experiment in experiments:
+        for seed in range(n_seed):
+            if data is not None:
+                data = np.append(data, np.load(rootdir + experiment + '/' + str(r)+'/'+experiment+file))
+            else:
+                data = np.load(folder+str(r)+'/'+experiment+file)
+
+            
+
+    path_to_data = []
+
+    for path in Path(rootdir).iterdir():
+    if path.is_dir():
+        path_to_data.append(path)
+
+    
+
+
+
 
 
 experiment = opt + '_0.1_1.0'
