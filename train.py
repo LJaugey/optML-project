@@ -50,6 +50,8 @@ max_seed = 424242
 rng = np.random.default_rng(42+rank)
 seeds = [rng.choice(max_seed, size=1, replace=False)[0] for _ in range(n_seeds_per_task)]
 
+print("Task:",rank)
+print("Seed:",seeds)
 for r_, seed in enumerate(seeds):
     seed_everything(seed)
     net = LeNet5(dataset=data_set)

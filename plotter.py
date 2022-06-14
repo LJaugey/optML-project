@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-#folder = 'results_test/mnist/mnist_Lenet5_seed_'
-folder = 'results_adam/mnist/lenet5_seed_'
-#folder = 'results_test/fmnist/fmnist_lenet5_seed_'
-experiment = 'adam_0.02_1_'
+opt = "sgdm"
+data_set = "cifar10"
+folder = 'results_'+opt+'/'+data_set+'/lenet5_seed_'
+experiment = opt+'_0.02_1_'
 
 file = 'ta.npy'
 n_seed = 5
@@ -25,6 +25,9 @@ print()
 print(data)
 print(data.shape)
 
+plt.figure()
+for i in range(n_seed):
+    plt.plot(data[i])
 mean = np.mean(data,axis=0)
 std = np.std(data,axis=0)
 
@@ -38,6 +41,7 @@ plt.plot(x,mean+std, color='r', linewidth=0.5)
 #plt.plot(x,mean, color='r', linewidth=1)
 
 
-plt.savefig("test.png")
-plt.savefig("test.pdf", format='pdf')
+#plt.savefig("test.png")
+#plt.savefig("test.pdf", format='pdf')
 
+plt.show()

@@ -2,7 +2,7 @@
 
 #SBATCH -n 5
 #SBATCH -c 4
-#SBATCH --time=1:0:0
+#SBATCH --time=2:0:0
 #SBATCH --gres=gpu:1
 #SBATCH --qos=gpu_free
 #SBATCH --partition=gpu
@@ -13,7 +13,9 @@
 #module purge
 #module load gcc mvapich2 python
 
-srun python train.py sgdm mnist
-srun python train.py adam mnist
-srun python train.py adgd mnist
+srun python train.py sgdm cifar10
+sleep 10
+srun python train.py adam cifar10
+sleep 10
+srun python train.py adgd cifar10
 

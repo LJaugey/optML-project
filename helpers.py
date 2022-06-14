@@ -227,7 +227,7 @@ def run_sgdm(net, device, trainloader, testloader, N_train, n_epoch=2, checkpoin
     net.train() # sets network to train mode
     lrs = []
     criterion = torch.nn.CrossEntropyLoss()
-    optimizer = SGD(net.parameters(), 0.1, 0.9) # standard values of lr = 0.1, beta = 0.9
+    optimizer = SGD(net.parameters(), 0.01, 0.9) # standard values of lr = 0.1, beta = 0.9
             
     for epoch in range(n_epoch):  # loop over the dataset multiple times
 
