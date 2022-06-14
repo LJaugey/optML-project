@@ -33,6 +33,9 @@ print()
 print(data)
 print(data.shape)
 
+plt.figure()
+for i in range(n_seed):
+    plt.plot(data[i])
 mean = np.mean(data,axis=0)
 std = np.std(data,axis=0)
 
@@ -49,3 +52,4 @@ plt.plot(x,mean+std, color='r', linewidth=0.5)
 plt.savefig("test_" + dataset + "_" + experiment + ".png")
 plt.savefig("test.pdf", format='pdf')
 
+plt.show()
