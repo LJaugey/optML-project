@@ -1,18 +1,26 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-#folder = 'results_test/mnist/mnist_Lenet5_seed_'
-folder = 'results_adam/mnist/lenet5_seed_'
-#folder = 'results_test/fmnist/fmnist_lenet5_seed_'
-experiment = 'adam_0.02_1_'
+opt = 'adgd'
+dataset = 'emnist'
 
-file = 'ta.npy'
+#folder = 'results_test/mnist/mnist_Lenet5_seed_'
+#folder = 'results_' + opt + '/fmnist/lenet5_seed_'
+#folder = 'results_' + opt + '/' + dataset + '/lenet5_seed_'
+
+
+experiment = opt + '_0.1_1.0'
+
+folder = 'results/' + dataset + '/'+ experiment + '/lenet5_seed_'
+
+file = '_ta.npy'
 n_seed = 5
 
 data = None
 
 
 for r in range(n_seed):
+
     print(np.load(folder+str(r)+'/'+experiment+file))
     
     if data is not None:
@@ -38,6 +46,6 @@ plt.plot(x,mean+std, color='r', linewidth=0.5)
 #plt.plot(x,mean, color='r', linewidth=1)
 
 
-plt.savefig("test.png")
+plt.savefig("test_" + dataset + "_" + experiment + ".png")
 plt.savefig("test.pdf", format='pdf')
 
