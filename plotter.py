@@ -47,9 +47,17 @@ def getDataExperiment(experiment, dir):
 
     return mean, std
 
+# Use LaTeX font
+plt.rcParams.update({
+    "text.usetex": True,
+    "font.family": "serif",
+    "font.sans-serif": ["Computer Modern Roman"]})
+
+
 # load all the data
 datasets = ['mnist', 'fmnist', 'emnist', 'cifar10']
 experiments = ['adgd_0.1_1.0', 'adgd_0.02_1.0', 'adgd_0.02_2.0', 'adam_0.01', 'sgdm_0.01_0.9']
+leg_exp = [r'AdGD: $\gamma=0.1, \alpha=1.0$', r'AdGD: $\gamma=0.02 , \alpha=1.0$', r'AdGD: $\gamma=0.02 , \alpha=0.5$', r'Adam: $\lambda=0.01$', r'SGDm: $\lambda=0.01 , \beta=0.9$']
 mean_stds_dict = dict()
 
 parent_folder = 'results/'
@@ -63,59 +71,74 @@ for dataset in datasets:
 
     
 # for each dataset, compare the three experiments of adgd
-epochs = np.linspace(1.5, 100, 200)
 
 for ind, dataset in enumerate(datasets):
     colors = ['r', 'b', 'g']
     # plot test accuracies
-    plt.figure()
+    fig = plt.figure(figsize=(4,3))
+    plt.grid(which='major')
+    plt.grid(which='minor', linestyle=':', linewidth=0.5)
     for i in range(3):
         
         mean = mean_stds_dict[dataset][experiments[i]][0][0]
         std = mean_stds_dict[dataset][experiments[i]][1][0]
         epochs = np.arange(1, mean.shape[0]+1) / mean.shape[0] * 100
-        plt.fill_between(epochs,mean-std, mean+std, color=colors[i],alpha=0.325)
-        plt.plot(epochs, mean, color=colors[i], linewidth=1)
+        plt.fill_between(epochs,mean-std, mean+std, color=colors[i],alpha=0.325, label=leg_exp[i])
+        plt.plot(epochs, mean, color=colors[i], linewidth=1, label=leg_exp[i])
 
     plt.xlabel('Epochs')
     plt.ylabel('Test accuracy')
-    plt.title('Comparison adgd')
-
-    plt.savefig(save_folder + dataset + '/' + 'ta_adgd.png')
-
+    plt.title('Comparison Adgd')
+    handles, l = fig.get_axes()[0].get_legend_handles_labels()
+    plt.legend([(handles[i],handles[i+1]) for i in range(0,len(handles),2)],[leg_exp[k] for k in range(3)])
+    plt.subplots_adjust(bottom=0.14)
+    plt.savefig(save_folder + dataset + '/' + 'ta_adgd.pdf')
+    
     # plot losses
-    plt.figure()
+    fig = plt.figure(figsize=(4,3))
+    plt.grid(which='major')
+    plt.grid(which='minor', linestyle=':', linewidth=0.5)
     for i in range(3):
         
         mean = mean_stds_dict[dataset][experiments[i]][0][1]
         std = mean_stds_dict[dataset][experiments[i]][1][1]
         epochs = np.arange(1, mean.shape[0]+1) / mean.shape[0] * 100
-        plt.fill_between(epochs,mean-std, mean+std, color=colors[i],alpha=0.325)
-        plt.plot(epochs, mean, color=colors[i], linewidth=1)
-        # plt.plot(mean-std, color=colors[i], linewidth=0.5)
-        # plt.plot(mean+std, color=colors[i], linewidth=0.5)
+        plt.fill_between(epochs,mean-std, mean+std, color=colors[i],alpha=0.325, label=leg_exp[i])
+        plt.plot(epochs, mean, color=colors[i], linewidth=1, label=leg_exp[i])
+        
+        
 
     plt.xlabel('Epochs')
     plt.ylabel('Training loss')
-    plt.title('Comparison adgd')
-    plt.savefig(save_folder + dataset + '/' + 'l_adgd.png')
+    plt.title('Comparison Adgd')
+    handles, l = fig.get_axes()[0].get_legend_handles_labels()
+    plt.legend([(handles[i],handles[i+1]) for i in range(0,len(handles),2)],[leg_exp[k] for k in range(3)])
+    
+    if ind == 2: plt.subplots_adjust(bottom=0.14, left=0.15)
+    else: plt.subplots_adjust(bottom=0.14)
+    plt.savefig(save_folder + dataset + '/' + 'l_adgd.pdf')
 
-    plt.figure()
+    fig = plt.figure(figsize=(4,3))
+    plt.grid(which='major')
+    plt.grid(which='minor', linestyle=':', linewidth=0.5)
     for i in range(3):
         
         mean = mean_stds_dict[dataset][experiments[i]][0][2]
         std = mean_stds_dict[dataset][experiments[i]][1][2]
         epochs = np.arange(1, mean.shape[0]+1) / mean.shape[0] * 100
-        plt.fill_between(epochs,mean-std, mean+std, color=colors[i],alpha=0.325)
-        plt.plot(epochs, mean, color=colors[i], linewidth=1)
-        # plt.plot(mean-std, color=colors[i], linewidth=0.5)
-        # plt.plot(mean+std, color=colors[i], linewidth=0.5)
+        plt.fill_between(epochs,mean-std, mean+std, color=colors[i],alpha=0.325, label=leg_exp[i])
+        plt.plot(epochs, mean, color=colors[i], linewidth=1, label=leg_exp[i])
+        
+        
 
     plt.xlabel('Epochs')
     plt.ylabel('Learning rates')
-    plt.title('Comparison adgd')
+    plt.title('Comparison Adgd')
     plt.yscale('log')
-    plt.savefig(save_folder + dataset + '/' + 'lr_adgd.png')
+    handles, l = fig.get_axes()[0].get_legend_handles_labels()
+    plt.legend([(handles[i],handles[i+1]) for i in range(0,len(handles),2)],[leg_exp[k] for k in range(3)])
+    plt.subplots_adjust(bottom=0.14, left=0.15)
+    plt.savefig(save_folder + dataset + '/' + 'lr_adgd.pdf')
 
 
 # for each dataset, compare the adgd with adam and sgdm
@@ -125,56 +148,73 @@ indices_exp = [0, 3, 4]
 for ind, dataset in enumerate(datasets):
     colors = ['r', 'b', 'g']
     # plot test accuracies
-    plt.figure()
+    
+    fig = plt.figure(figsize=(4,3))
+    plt.grid(which='major')
+    plt.grid(which='minor', linestyle=':', linewidth=0.5)
+    
     for index, i in enumerate(indices_exp):
         
         mean = mean_stds_dict[dataset][experiments[i]][0][0]
         std = mean_stds_dict[dataset][experiments[i]][1][0]
         epochs = np.arange(1, mean.shape[0]+1) / mean.shape[0] * 100
-        plt.fill_between(epochs,mean-std, mean+std, color=colors[index],alpha=0.325)
-        plt.plot(epochs, mean, color=colors[index], linewidth=1)
+        plt.fill_between(epochs,mean-std, mean+std, color=colors[index],alpha=0.325, label=leg_exp[i])
+        plt.plot(epochs, mean, color=colors[index], linewidth=1, label=leg_exp[i])
 
     plt.xlabel('Epochs')
     plt.ylabel('Test accuracy')
-    plt.title('Comparison adgd')
+    plt.title('Comparison')
+    handles, l = fig.get_axes()[0].get_legend_handles_labels()
+    plt.legend([(handles[i],handles[i+1]) for i in range(0,len(handles),2)],[leg_exp[k] for k in indices_exp])
+    plt.subplots_adjust(bottom=0.14)
 
-    plt.savefig(save_folder + dataset + '/' + 'ta_comp.png')
-
+    plt.savefig(save_folder + dataset + '/' + 'ta_comp.pdf')
+    
     # plot losses
-    plt.figure()
+    fig = plt.figure(figsize=(4,3))
+    plt.grid(which='major')
+    plt.grid(which='minor', linestyle=':', linewidth=0.5)
+    
     for index, i in enumerate(indices_exp):
         
         mean = mean_stds_dict[dataset][experiments[i]][0][1]
         std = mean_stds_dict[dataset][experiments[i]][1][1]
         epochs = np.arange(1, mean.shape[0]+1) / mean.shape[0] * 100
-        plt.fill_between(epochs,mean-std, mean+std, color=colors[index],alpha=0.325)
-        plt.plot(epochs, mean, color=colors[index], linewidth=1)
-        # plt.plot(mean-std, color=colors[i], linewidth=0.5)
-        # plt.plot(mean+std, color=colors[i], linewidth=0.5)
+        plt.fill_between(epochs,mean-std, mean+std, color=colors[index],alpha=0.325, label=leg_exp[i])
+        plt.plot(epochs, mean, color=colors[index], linewidth=1, label=leg_exp[i])
+        
+        
 
     plt.xlabel('Epochs')
     plt.ylabel('Training loss')
-    plt.title('Comparison adgd')
-    plt.savefig(save_folder + dataset + '/' + 'l_comp.png')
-
-    plt.figure()
+    plt.title('Comparison')
+    handles, l = fig.get_axes()[0].get_legend_handles_labels()
+    plt.legend([(handles[i],handles[i+1]) for i in range(0,len(handles),2)],[leg_exp[k] for k in indices_exp])
+    plt.subplots_adjust(bottom=0.14)
+    plt.savefig(save_folder + dataset + '/' + 'l_comp.pdf')
+    
+    # plot learning rates
+    fig = plt.figure(figsize=(4,3))
+    plt.grid(which='major')
+    plt.grid(which='minor', linestyle=':', linewidth=0.5)
+    
     for index, i in enumerate(indices_exp):
         
         mean = mean_stds_dict[dataset][experiments[i]][0][2]
         std = mean_stds_dict[dataset][experiments[i]][1][2]
         epochs = np.arange(1, mean.shape[0]+1) / mean.shape[0] * 100
-        plt.fill_between(epochs,mean-std, mean+std, color=colors[index],alpha=0.325)
-        plt.plot(epochs, mean, color=colors[index], linewidth=1)
-        # plt.plot(mean-std, color=colors[i], linewidth=0.5)
-        # plt.plot(mean+std, color=colors[i], linewidth=0.5)
+        plt.fill_between(epochs,mean-std, mean+std, color=colors[index],alpha=0.325, label=leg_exp[i])
+        plt.plot(epochs, mean, color=colors[index], linewidth=1, label=leg_exp[i])
+        
+        
 
     plt.xlabel('Epochs')
     plt.ylabel('Learning rates')
-    plt.title('Comparison adgd')
+    plt.title('Comparison')
     plt.yscale('log')
-    plt.savefig(save_folder + dataset + '/' + 'lr_comp.png')
-
-# plt.savefig("test_" + dataset + "_" + experiment + ".png")
-# plt.savefig("test.pdf", format='pdf')
-
-# plt.show()
+    handles, l = fig.get_axes()[0].get_legend_handles_labels()
+    plt.legend([(handles[i],handles[i+1]) for i in range(0,len(handles),2)],[leg_exp[k] for k in indices_exp])
+    plt.subplots_adjust(bottom=0.14, left=0.15)
+    plt.savefig(save_folder + dataset + '/' + 'lr_comp.pdf')
+    
+plt.show()
