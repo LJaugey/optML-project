@@ -88,7 +88,7 @@ for ind, dataset in enumerate(datasets):
 
     plt.xlabel('Epochs')
     plt.ylabel('Test accuracy')
-    plt.title('Comparison Adgd')
+    plt.title('Comparison AdGD')
     handles, l = fig.get_axes()[0].get_legend_handles_labels()
     plt.legend([(handles[i],handles[i+1]) for i in range(0,len(handles),2)],[leg_exp[k] for k in range(3)])
     plt.subplots_adjust(bottom=0.14)
@@ -110,7 +110,7 @@ for ind, dataset in enumerate(datasets):
 
     plt.xlabel('Epochs')
     plt.ylabel('Training loss')
-    plt.title('Comparison Adgd')
+    plt.title('Comparison AdGD')
     handles, l = fig.get_axes()[0].get_legend_handles_labels()
     plt.legend([(handles[i],handles[i+1]) for i in range(0,len(handles),2)],[leg_exp[k] for k in range(3)])
     
@@ -133,7 +133,7 @@ for ind, dataset in enumerate(datasets):
 
     plt.xlabel('Epochs')
     plt.ylabel('Learning rates')
-    plt.title('Comparison Adgd')
+    plt.title('Comparison AdGD')
     plt.yscale('log')
     handles, l = fig.get_axes()[0].get_legend_handles_labels()
     plt.legend([(handles[i],handles[i+1]) for i in range(0,len(handles),2)],[leg_exp[k] for k in range(3)])
