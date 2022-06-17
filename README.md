@@ -21,6 +21,7 @@ This project tests the Adaptative Stochastic Gradient Descent method described i
 - ``lenet5.py``: NN model based on [LeNet5](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf).
 - ``optimizer.py``: Implementation of AdSGD.
 - ``helpers.py``: Useful functions for training model and saving results.
+- ``plotter.py``: Produces the graphs from the results of the experiments.
 - ``launch.sh``: Script to run all the training experiments on the Izar cluster (EPFL). 
 
 
@@ -28,7 +29,7 @@ This project tests the Adaptative Stochastic Gradient Descent method described i
 - ``python train.py optimizer dataset lr_amplifier lr_damping``
 
 where optimizer can be chosen from 
-- ``sgdm`` : SGDm with learning rate $\lambda=0.01$ and momentum $\beta = 0.9$.
+- ``sgdm`` : SGDm with learning rate $\lambda=0.01$ and momentum term $\beta = 0.9$.
 - ``adam`` : Adam with learning rate $\lambda = 0.001$.
 - ``adgd`` : AdSGD with learning rate amplifier $\gamma = $``lr_amplifier`` and learning rate damping $\delta=\frac{1}{\alpha}=$``lr_damping``.
 
