@@ -28,7 +28,7 @@ This project tests the Adaptative Stochastic Gradient Descent method described i
 - ``python train.py optimizer dataset lr_amplifier lr_damping``
 
 where optimizer can be chosen from 
-- ``sgdm`` : SGDm with learning rate $\lambda=0.01$ and momentum $\beta = 0.9$.
+- ``sgdm`` : SGDm with learning rate $\lambda=0.01 \text{ and momentum } \beta = 0.9$.
 - ``adam`` : Adam with learning rate $\lambda = 0.001$.
 - ``adgd`` : AdSGD with learning rate amplifier $\gamma = $``lr_amplifier`` and learning rate damping $\delta=\frac{1}{\alpha}=$``lr_damping``.
 
