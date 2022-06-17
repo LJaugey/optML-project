@@ -57,7 +57,7 @@ plt.rcParams.update({
 # load all the data
 datasets = ['mnist', 'fmnist', 'emnist', 'cifar10']
 experiments = ['adgd_0.1_1.0', 'adgd_0.02_1.0', 'adgd_0.02_2.0', 'adam_0.01', 'sgdm_0.01_0.9']
-leg_exp = [r'AdGD: $\gamma=0.1, \alpha=1.0$', r'AdGD: $\gamma=0.02 , \alpha=1.0$', r'AdGD: $\gamma=0.02 , \alpha=0.5$', r'Adam: $\lambda=0.01$', r'SGDm: $\lambda=0.01 , \beta=0.9$']
+leg_exp = [r'AdSGD: $\gamma=0.1, \alpha=1.0$', r'AdSGD: $\gamma=0.02 , \alpha=1.0$', r'AdSGD: $\gamma=0.02 , \alpha=0.5$', r'Adam: $\lambda=0.01$', r'SGDm: $\lambda=0.01 , \beta=0.9$']
 mean_stds_dict = dict()
 
 parent_folder = 'results/'
@@ -88,7 +88,7 @@ for ind, dataset in enumerate(datasets):
 
     plt.xlabel('Epochs')
     plt.ylabel('Test accuracy')
-    plt.title('Comparison AdGD')
+    plt.title('Comparison AdSGD')
     handles, l = fig.get_axes()[0].get_legend_handles_labels()
     plt.legend([(handles[i],handles[i+1]) for i in range(0,len(handles),2)],[leg_exp[k] for k in range(3)])
     plt.subplots_adjust(bottom=0.14)
@@ -110,7 +110,7 @@ for ind, dataset in enumerate(datasets):
 
     plt.xlabel('Epochs')
     plt.ylabel('Training loss')
-    plt.title('Comparison AdGD')
+    plt.title('Comparison AdSGD')
     handles, l = fig.get_axes()[0].get_legend_handles_labels()
     plt.legend([(handles[i],handles[i+1]) for i in range(0,len(handles),2)],[leg_exp[k] for k in range(3)])
     
@@ -133,7 +133,7 @@ for ind, dataset in enumerate(datasets):
 
     plt.xlabel('Epochs')
     plt.ylabel('Learning rates')
-    plt.title('Comparison AdGD')
+    plt.title('Comparison AdSGD')
     plt.yscale('log')
     handles, l = fig.get_axes()[0].get_legend_handles_labels()
     plt.legend([(handles[i],handles[i+1]) for i in range(0,len(handles),2)],[leg_exp[k] for k in range(3)])
