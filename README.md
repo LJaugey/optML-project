@@ -29,7 +29,7 @@ This project tests the Adaptative Stochastic Gradient Descent method described i
 - ``python train.py optimizer dataset lr_amplifier lr_damping``
 
 where optimizer can be chosen from 
-- ``sgdm`` : SGDm with learning rate $\lambda=0.01$ and momentum term $\beta = 0.9$.
+- ``sgdm`` : SGDm with learning rate $\lambda=0.01 \text{ and momentum term } \beta=0.9$.
 - ``adam`` : Adam with learning rate $\lambda = 0.001$.
 - ``adgd`` : AdSGD with learning rate amplifier $\gamma = $``lr_amplifier`` and learning rate damping $\delta=\frac{1}{\alpha}=$``lr_damping``.
 
@@ -40,13 +40,14 @@ Example:
 
 It should be noted that this code requires MPI to run. One can easily modify the code in ``train.py``, so the code runs without using MPI. Simply remove the lines
 ```
+12 from mpi4py import MPI
 14 comm = MPI.COMM_WORLD
 15 size = comm.Get_size()
 16 rank = comm.Get_rank()
 ```
-and remove any reference to ``rank`` in the code.
+set ``rank`` to zero in the code and set ``n_seeds_per_task`` to 5. 
 
 ### How to run the code on the Izar cluster
 - Load the modules : ``module load gcc mvapich2 python``
-- Create a virtual environment, install python and all required packages. 
+- Create a [virtual environment](https://scitas-data.epfl.ch/confluence/display/DOC/Python+Virtual+Environments) , install python and all required packages. 
 - Run the launch script: ``sbatch launch.sh``
