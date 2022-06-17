@@ -2,7 +2,7 @@
 
 #SBATCH -n 5
 #SBATCH -c 4
-#SBATCH --time=1:45:0
+#SBATCH --time=20:0:0
 #SBATCH --gres=gpu:1
 #SBATCH --qos=gpu_free
 #SBATCH --partition=build
